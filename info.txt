@@ -1,0 +1,21 @@
+Dependencies:
+Spring Web
+Thymeleaf
+Lombok
+Spring Security
+Spring Data JPA
+
+
+2 tipuri de user:
+Administrator
+Employee
+
+Abilitati :
+~Employee: - Seteaza cantitatea unui produs
+	   - Seteaza daca produsul este in stock
+~Administrator : - Creeaza un nou Employee
+		 - Creeaza produs nou
+		 - Creeaza o noua categorie
+		 - Modifica pretul produsului
+		 - Tot ce poate face si Employee
+
