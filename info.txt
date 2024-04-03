@@ -19,3 +19,13 @@ Abilitati :
 		 - Modifica pretul produsului
 		 - Tot ce poate face si Employee
 
+pagini html:
+
+adminPanel
+createNewCategory
+createNewProduct
+CreateNewUser
+home
+listOfCategories
+listOfProducts
+login

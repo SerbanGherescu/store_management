@@ -11,7 +11,7 @@ public interface ProductRepo extends JpaRepository<Product, Long> {
 
     Product create(Product product);
 
-    Optional<Product> findByName(String name);
+    Product findByName(String name);
 
     Optional<Product> findById(Long id);
 
