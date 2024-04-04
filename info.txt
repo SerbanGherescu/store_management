@@ -6,7 +6,7 @@ Spring Security
 Spring Data JPA
 
 
-2 tipuri de user:
+2 tipuri de employee:
 Administrator
 Employee
 

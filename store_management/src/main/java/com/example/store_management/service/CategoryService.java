@@ -43,7 +43,7 @@ public class CategoryService {
     public void deleteCategoryByName(String name) {
 
         categoryRepo.deleteByName(name);
-        System.out.println("Category "
+        System.out.println("Category with "
                 + name
                 + "successfully deleted!");
 

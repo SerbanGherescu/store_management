@@ -11,13 +11,19 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "user")
-public class User {
+@Table(name = "employee")
+public class Employee {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private long id;
+
+    @Column(name = "first_name")
+    private String firstName;
+
+    @Column(name = "last_name")
+    private String lastName;
 
     @Column(name = "user_name")
     private String userName;
@@ -28,4 +34,11 @@ public class User {
     @Column(name = "role")
     private String role;
 
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String firstName, String lastName) {
+        this.userName = firstName + lastName;
+    }
 }

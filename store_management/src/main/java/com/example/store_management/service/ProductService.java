@@ -51,7 +51,7 @@ public class ProductService {
 
     public void deleteProductByName(String name) {
         productRepo.deleteByName(name);
-        System.out.println("Product "
+        System.out.println("Product with "
                 + name
                 + " successfully deleted!");
     }
