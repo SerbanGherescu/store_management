@@ -9,7 +9,7 @@ import java.util.Optional;
 @Repository
 public interface ProductRepo extends JpaRepository<Product, Long> {
 
-    Product create(Product product);
+    Product save(Product product);
 
     Product findByName(String name);
 

@@ -20,7 +20,7 @@ public class CategoryService {
 
     public void saveCategory(Category category) {
 
-        categoryRepo.create(category);
+        categoryRepo.save(category);
         System.out.println("Category "
                 + category.getName()
                 + " successfully created!");

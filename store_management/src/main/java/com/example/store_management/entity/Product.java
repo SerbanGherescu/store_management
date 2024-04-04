@@ -31,7 +31,7 @@ public class Product {
     @Column(name = "price")
     private double price;
 
-    @Column(name = "category")
+    @PrimaryKeyJoinColumn
     @OneToOne
     private Category category;
 }

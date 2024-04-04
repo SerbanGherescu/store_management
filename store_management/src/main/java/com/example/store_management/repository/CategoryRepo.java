@@ -10,7 +10,7 @@ import java.util.Optional;
 @Repository
 public interface CategoryRepo extends JpaRepository<Category, Long> {
 
-    Category create(Category category);
+    Category save(Category category);
 
     Category findByName(String name);
 

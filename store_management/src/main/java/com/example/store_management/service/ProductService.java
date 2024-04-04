@@ -22,7 +22,7 @@ public class ProductService {
 
     public void saveProduct(Product product) {
 
-        productRepo.create(product);
+        productRepo.save(product);
         System.out.println("Product "
                 + product.getName()
                 + " successfully created!");

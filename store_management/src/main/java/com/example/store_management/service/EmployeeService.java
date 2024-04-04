@@ -21,7 +21,7 @@ public class EmployeeService {
 
     public void saveEmployee(Employee employee) {
 
-        Employee savedEmployee = employeeRepo.create(employee);
+        Employee savedEmployee = employeeRepo.save(employee);
 
         System.out.println("Employee "
                 + employee.getUserName()

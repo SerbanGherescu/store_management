@@ -25,7 +25,7 @@ public class Category {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "product_list")
+    @PrimaryKeyJoinColumn
     @OneToMany
     private List<Product> productList = new ArrayList<>();
 

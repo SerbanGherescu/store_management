@@ -4,6 +4,7 @@ import com.example.store_management.entity.Employee;
 import com.example.store_management.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -23,12 +24,17 @@ public class AdminPanelController {
     }
 
     @GetMapping
-    public ModelAndView showAllEmployees() {
-        ModelAndView mav = new ModelAndView();
-        mav.addObject("employee", employeeService.showAllEmployees());
-
-        return mav;
+    public String adminPanelPage() {
+        return "adminPanel";
     }
+
+//    @GetMapping
+//    public ModelAndView showAllEmployees() {
+//        ModelAndView mav = new ModelAndView();
+//        mav.addObject("employee", employeeService.showAllEmployees());
+//
+//        return mav;
+//    }
 
     @GetMapping("/createNewEmployee")
     public String createEmployeeForm(Model model) {
@@ -55,6 +61,9 @@ public class AdminPanelController {
                         + employee.getUserName()
                         + "already exists!");
             } else {
+                BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+                String encodedPassword = encoder.encode(employee.getPassword());
+                employee.setPassword(encodedPassword);
                 employeeService.saveEmployee(employee);
             }
             return "redirect:/createNewEmployee?success";
