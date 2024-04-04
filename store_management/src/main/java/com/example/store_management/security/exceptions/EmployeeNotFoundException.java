@@ -1,4 +1,4 @@
-package com.example.store_management.security;
+package com.example.store_management.security.exceptions;
 
 import javax.naming.AuthenticationException;
 

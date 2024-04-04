@@ -42,12 +42,12 @@ public class EmployeeService {
         return allEmployeesFound;
     }
 
-    public void deleteEmployeeByUserName(String name) {
+    public void deleteEmployeeById(Long id) {
 
-        employeeRepo.deleteByUserName(name);
+        employeeRepo.deleteById(id);
 
         System.out.println("Employee with "
-                + name
+                + id
                 + " successfully deleted!");
 
     }

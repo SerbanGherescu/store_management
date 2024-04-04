@@ -6,10 +6,8 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import javax.management.relation.Role;
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
+import java.util.Collections;
 
 public class EmployeeDetailsAdaptor implements UserDetails {
 
@@ -20,20 +18,20 @@ public class EmployeeDetailsAdaptor implements UserDetails {
         this.employee = employee;
     }
 
-
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        // Assuming employee role is stored in the 'role' field of the Employee entity
+        return Collections.singleton(new SimpleGrantedAuthority(employee.getRole()));
     }
 
     @Override
     public String getPassword() {
-        return null;
+        return employee.getPassword();
     }
 
     @Override
     public String getUsername() {
-        return null;
+        return employee.getUserName();
     }
 
     @Override

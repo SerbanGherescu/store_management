@@ -66,13 +66,7 @@ public class ProductController {
         }
     }
 
-    @DeleteMapping("/{name}")
-    public ResponseEntity<?> deleteProductByName(@PathVariable String name) {
-        productService.deleteProductByName(name);
-        return ResponseEntity.ok().build();
-    }
-
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/deleteProduct/{id}")
     public ResponseEntity<?> deleteProductById(@PathVariable Long id) {
         productService.deleteProductById(id);
         return ResponseEntity.ok().build();

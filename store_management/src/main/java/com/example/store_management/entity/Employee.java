@@ -9,9 +9,9 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-@AllArgsConstructor
-@NoArgsConstructor
 @Table(name = "employee")
+@NoArgsConstructor
+@AllArgsConstructor
 public class Employee {
 
     @Id
@@ -34,11 +34,24 @@ public class Employee {
     @Column(name = "role")
     private String role;
 
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String firstName, String lastName) {
+    // Constructor
+    public Employee(String firstName, String lastName, String password, String role) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.password = password;
+        this.role = role;
         this.userName = firstName + lastName;
     }
+
+    // Setters for firstName and lastName
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+        this.userName = firstName + lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+        this.userName = firstName + lastName;
+    }
+
 }

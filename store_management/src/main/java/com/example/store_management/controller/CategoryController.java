@@ -61,7 +61,7 @@ public class CategoryController {
         return "redirect:/createNewCategory?success";
     }
 
-    @DeleteMapping("/category/{name}")
+    @DeleteMapping("/deleteCategory/{name}")
     public ResponseEntity<?> deleteCategoryByName(@PathVariable String name) {
         categoryService.deleteCategoryByName(name);
         return ResponseEntity.ok().build();
