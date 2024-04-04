@@ -11,8 +11,6 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.Optional;
-
 @Controller
 @RequestMapping("/category")
 public class CategoryController {
@@ -25,7 +23,7 @@ public class CategoryController {
     }
 
     @GetMapping("/listOfCategories")
-    public ModelAndView listOfCategories() {
+    public ModelAndView showListOfCategories() {
 
         ModelAndView mav = new ModelAndView("listOfCategories");
         mav.addObject("category", categoryService.getAllCategories());
@@ -35,7 +33,7 @@ public class CategoryController {
     }
 
     @GetMapping("/createNewCategory")
-    public String showCreateNewCategoryForm(Model model) {
+    public String CreateNewCategoryForm(Model model) {
         Category category = new Category();
         model.addAttribute("category", category);
         return "createNewCategory";
@@ -45,7 +43,6 @@ public class CategoryController {
     public String createNewCategory(@Validated @ModelAttribute("category")
                                     Category category,
                                     BindingResult result) {
-
         if (result.hasErrors()) {
             System.out.println("Some error appear when trying to create new category!");
             return "createNewCategory";
@@ -60,7 +57,6 @@ public class CategoryController {
             } else {
                 categoryService.saveCategory(category);
             }
-
         }
         return "redirect:/createNewCategory?success";
     }

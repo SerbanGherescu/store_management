@@ -5,6 +5,7 @@ import com.example.store_management.repository.ProductRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -28,7 +29,7 @@ public class ProductService {
 
     }
 
-    public Product findProductByName(String name) {
+    public Product searchProductByName(String name) {
 
         Product productFound = productRepo.findByName(name);
 
@@ -42,6 +43,10 @@ public class ProductService {
 
         return productFound;
 
+    }
+
+    public List<Product> getAllProducts() {
+        return productRepo.findAll();
     }
 
     public void deleteProductByName(String name) {
