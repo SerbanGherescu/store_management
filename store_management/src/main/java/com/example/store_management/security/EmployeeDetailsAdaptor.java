@@ -20,8 +20,13 @@ public class EmployeeDetailsAdaptor implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        // Assuming employee role is stored in the 'role' field of the Employee entity
-        return Collections.singleton(new SimpleGrantedAuthority(employee.getRole()));
+        String role = employee.getRole();
+        if (role != null && !role.isEmpty()) {
+            return Collections.singleton(new SimpleGrantedAuthority(role));
+        } else {
+            // If role is null or empty, return an empty collection
+            return Collections.emptyList();
+        }
     }
 
     @Override
@@ -36,21 +41,21 @@ public class EmployeeDetailsAdaptor implements UserDetails {
 
     @Override
     public boolean isAccountNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isEnabled() {
-        return false;
+        return true;
     }
 }

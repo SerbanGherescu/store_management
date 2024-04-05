@@ -6,7 +6,7 @@ Spring Security
 Spring Data JPA
 
 
-2 tipuri de employee:
+2 tipuri de user:
 Administrator
 Employee
 
@@ -24,8 +24,9 @@ pagini html:
 adminPanel
 createNewCategory
 createNewProduct
-CreateNewUser
-home
+CreateNewEmployee
 listOfCategories
 listOfProducts
 login
+
+sa modific cum sa creez produse/categorii in baza produselor create, am un minimodel in chatgpt ( https://chat.openai.com/c/9716d329-4f46-4016-a5d4-ae0fb01c4e4d )
