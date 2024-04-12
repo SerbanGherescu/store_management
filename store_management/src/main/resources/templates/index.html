@@ -43,30 +43,32 @@
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
+        <!-- Conditionally render the Admin Panel button -->
+        <div th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" th:href="@{/adminPanel}">
+                        Admin Panel
+                    </a>
+                </li>
+            </ul>
+        </div>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" th:href="@{/logout}">Logout</a>
                 </li>
             </ul>
-            <!-- Conditionally render the Admin Panel button -->
-            <div th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">
-                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" th:href="@{/adminPanel}">
-                            Admin Panel
-                        </a>
-                    </li>
-                </ul>
-            </div>
         </div>
     </div>
 </nav>
 
-    <div>
-        <button class="button one" th:href="@{/category/listOfCategories}">Categories list</button>
-        <button class="button two" th:href="@{/product/listOfProducts}">Products list</button>
-    </div>
+<form th:action="@{/category/listOfCategories}" method="get">
+    <button class="button one" type="submit">Go to Categories</button>
+</form>
+<form th:action="@{/product/listOfProducts}" method="get">
+    <button class="button two" type="submit">Go to Products</button>
+</form>
 
 </body>
 </html>

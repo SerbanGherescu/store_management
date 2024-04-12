@@ -57,6 +57,7 @@ public class AdminPanelController {
         } else {
             BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
             String encodedPassword = encoder.encode(employee.getPassword());
+            employee.setRole("EMPLOYEE");
             employee.setPassword(encodedPassword);
             employeeService.saveEmployee(employee);
             redirectAttributes.addFlashAttribute("successMessage", "Employee created successfully!");
