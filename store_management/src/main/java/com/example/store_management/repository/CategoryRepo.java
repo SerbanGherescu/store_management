@@ -15,8 +15,5 @@ public interface CategoryRepo extends JpaRepository<Category, Long> {
 
     Category findByName(String name);
 
-    @Transactional
-    void deleteByName(String name);
-
     Optional<Category> findById(Long id);
 }

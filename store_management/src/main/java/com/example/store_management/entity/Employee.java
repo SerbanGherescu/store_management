@@ -33,7 +33,6 @@ public class Employee {
 
     private String role;
 
-    // Constructor
     public Employee(String firstName, String lastName, String password, String role) {
         this.firstName = firstName;
         this.lastName = lastName;
@@ -42,7 +41,6 @@ public class Employee {
         this.userName = firstName + lastName;
     }
 
-    // Setters for firstName and lastName
     public void setFirstName(String firstName) {
         this.firstName = firstName;
         this.userName = firstName + lastName;

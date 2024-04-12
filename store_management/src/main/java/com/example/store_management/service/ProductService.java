@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class ProductService {
@@ -41,17 +40,6 @@ public class ProductService {
 
         return productRepo.findByCategoryId(id);
 
-    }
-
-    public List<Product> getAllProducts() {
-        return productRepo.findAll();
-    }
-
-    public void deleteProductByName(String name) {
-        productRepo.deleteByName(name);
-        System.out.println("Product with "
-                + name
-                + " successfully deleted!");
     }
 
     public void updateProductStock(Long productId, boolean newStockStatus) {

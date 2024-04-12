@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -15,7 +14,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.util.Collection;
 import java.util.List;
 
 @Controller
@@ -52,7 +50,10 @@ public class AdminPanelController {
                                     RedirectAttributes redirectAttributes) {
         Employee existingEmployee = employeeService.findEmployeeByUserName(employee.getUserName());
         if (existingEmployee != null) {
-            redirectAttributes.addFlashAttribute("errorMessage", "Employee with username " + employee.getUserName() + " already exists!");
+            redirectAttributes.addFlashAttribute("errorMessage",
+                    "Employee with username "
+                    + employee.getUserName()
+                    + " already exists!");
             return "redirect:/adminPanel/createNewEmployee";
         } else {
             BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
@@ -60,24 +61,22 @@ public class AdminPanelController {
             employee.setRole("EMPLOYEE");
             employee.setPassword(encodedPassword);
             employeeService.saveEmployee(employee);
-            redirectAttributes.addFlashAttribute("successMessage", "Employee created successfully!");
-            return "redirect:/adminPanel"; // Redirect to a different URL after successful creation
+            redirectAttributes.addFlashAttribute("successMessage",
+                    "Employee created successfully!");
+            return "redirect:/adminPanel";
         }
     }
 
     @DeleteMapping("/deleteEmployee/{id}")
     public ResponseEntity<?> deleteEmployee(@PathVariable Long id) {
-        // Check if the authenticated user has the necessary role
+        // Checking if users has necessary role
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (!authentication.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_ADMIN"))) {
-            // Return a 403 Forbidden response if the user is not authorized
             return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
         }
 
-        // Perform the deletion logic
         employeeService.deleteEmployeeById(id);
 
-        // Return a 204 No Content response upon successful deletion
         return ResponseEntity.noContent().build();
     }
 

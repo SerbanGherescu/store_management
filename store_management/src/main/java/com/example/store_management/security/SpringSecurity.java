@@ -75,7 +75,7 @@ public class SpringSecurity {
     @Autowired
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService);
-        // Add additional in-memory users if needed
+        //added admin user for moderation
         auth.inMemoryAuthentication()
                 .withUser("admin")
                 .password(passwordEncoder().encode("admin"))

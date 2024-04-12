@@ -1,7 +1,6 @@
 package com.example.store_management.service;
 
 import com.example.store_management.entity.Category;
-import com.example.store_management.entity.Product;
 import com.example.store_management.repository.CategoryRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -46,14 +45,7 @@ public class CategoryService {
         return optionalCategory.orElse(null);
     }
 
-    public void deleteCategoryByName(String name) {
 
-        categoryRepo.deleteByName(name);
-        System.out.println("Category with "
-                + name
-                + "successfully deleted!");
-
-    }
     public void deleteCategoryByID(Long id) {
 
         categoryRepo.deleteById(id);
@@ -63,7 +55,4 @@ public class CategoryService {
 
     }
 
-    public List<Product> getProductsByCategory(Category category) {
-        return category.getProductList();
-    }
 }

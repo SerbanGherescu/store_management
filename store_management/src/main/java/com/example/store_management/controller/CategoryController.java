@@ -31,7 +31,7 @@ public class CategoryController {
     @GetMapping("/listOfCategories")
     public ModelAndView showListOfCategories() {
         List<Category> categories = categoryService.getAllCategories();
-        System.out.println("Number of categories: " + categories.size()); // Log the number of categories
+        System.out.println("Number of categories: " + categories.size());
         ModelAndView mav = new ModelAndView("listOfCategories");
         mav.addObject("categories", categories);
         return mav;
@@ -68,17 +68,14 @@ public class CategoryController {
 
     @DeleteMapping("/deleteCategory/{id}")
     public ResponseEntity<?> deleteCategory(@PathVariable Long id) {
-        // Check if the authenticated user has the necessary role
+        // Checking if users has necessary role
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (!authentication.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_ADMIN"))) {
-            // Return a 403 Forbidden response if the user is not authorized
             return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
         }
 
-        // Perform the deletion logic
         categoryService.deleteCategoryByID(id);
 
-        // Return a 204 No Content response upon successful deletion
         return ResponseEntity.noContent().build();
     }
 }
