@@ -58,7 +58,7 @@ public class CategoryController {
                 categoryService.saveCategory(category);
             }
         }
-        return "redirect:/createNewCategory?success";
+        return "redirect:/createNewCategory";
     }
 
     @DeleteMapping("/deleteCategory/{name}")

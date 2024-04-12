@@ -41,7 +41,7 @@ public class SpringSecurity {
                                 .hasRole("ADMIN")
                                 .requestMatchers("/index",
                                         "/category/listOfCategories",
-                                        "/product/listOfProducts")
+                                        "/product/listOfProducts/{id}")
                                 .authenticated()
                                 .requestMatchers("/login")
                                 .permitAll()

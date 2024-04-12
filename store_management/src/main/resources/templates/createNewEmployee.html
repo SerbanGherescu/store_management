@@ -19,20 +19,17 @@
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-<!--        <div class="collapse navbar-collapse" id="navbarSupportedContent">-->
-<!--            <ul class="navbar-nav me-auto mb-2 mb-lg-0">-->
-<!--                <li class="nav-item">-->
-<!--                    <a class="nav-link active" aria-current="page" th:href="@{/login}">Login</a>-->
-<!--                </li>-->
-<!--            </ul>-->
-<!--        </div>-->
-        <!--        <div class="collapse navbar-collapse" id="navbarSupportedContent">-->
-        <!--            <ul class="navbar-nav me-auto mb-2 mb-lg-0">-->
-        <!--                <li class="nav-item">-->
-        <!--                    <a class="nav-link active" aria-current="page" th:href="@{}"></a>-->
-        <!--                </li>-->
-        <!--            </ul>-->
-        <!--        </div>-->
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <li class="nav-item">
+                <a class="nav-link active" aria-current="page" th:href="@{/logout}">Logout</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" aria-current="page" th:href="@{/adminPanel}">
+                    Admin Panel
+                </a>
+            </li>
+        </div>
+
     </div>
 </nav>
 <div class="container">
@@ -71,19 +68,19 @@
                                    placeholder="Enter last name">
                         </div>
 
-<!--                    <div class="form-group mb-3">-->
-<!--                        <label class="form-label">Email</label>-->
-<!--                        <input-->
-<!--                                class="form-control"-->
-<!--                                id="email"-->
-<!--                                name="email"-->
-<!--                                placeholder="Email"-->
-<!--                                th:field="*{email}"-->
-<!--                                type="email"-->
-<!--                        />-->
-<!--                        <p th:errors = "*{email}" class="text-danger"-->
-<!--                           th:if="${#fields.hasErrors('email')}"></p>-->
-<!--                    </div>-->
+                        <!--                    <div class="form-group mb-3">-->
+                        <!--                        <label class="form-label">Email</label>-->
+                        <!--                        <input-->
+                        <!--                                class="form-control"-->
+                        <!--                                id="email"-->
+                        <!--                                name="email"-->
+                        <!--                                placeholder="Email"-->
+                        <!--                                th:field="*{email}"-->
+                        <!--                                type="email"-->
+                        <!--                        />-->
+                        <!--                        <p th:errors = "*{email}" class="text-danger"-->
+                        <!--                           th:if="${#fields.hasErrors('email')}"></p>-->
+                        <!--                    </div>-->
                         <div class="form-group">
                             <label for="password">Password:</label>
                             <input type="password"

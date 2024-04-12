@@ -1,6 +1,8 @@
 package com.example.store_management.controller;
 
+import com.example.store_management.entity.Category;
 import com.example.store_management.entity.Product;
+import com.example.store_management.service.CategoryService;
 import com.example.store_management.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -16,18 +18,21 @@ import org.springframework.web.servlet.ModelAndView;
 public class ProductController {
 
     private final ProductService productService;
+    private final CategoryService categoryService;
 
     @Autowired
-    public ProductController(ProductService productService) {
+    public ProductController(ProductService productService, CategoryService categoryService) {
 
+        this.categoryService = categoryService;
         this.productService = productService;
 
     }
 
-    @GetMapping("/listOfProducts")
-    public ModelAndView showListOfProducts() {
+    @GetMapping("/listOfProducts/{id}")
+    public ModelAndView showListOfProducts(@PathVariable Long id) {
 
         ModelAndView mav = new ModelAndView("listOfProducts");
+        Category category = categoryService.getCategoryById(id);
         mav.addObject("product", productService.getAllProducts());
 
         return mav;

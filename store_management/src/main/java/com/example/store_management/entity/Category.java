@@ -25,8 +25,7 @@ public class Category {
     @Column(name = "name")
     private String name;
 
-    @PrimaryKeyJoinColumn
-    @OneToMany
+    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
     private List<Product> productList = new ArrayList<>();
 
 }
