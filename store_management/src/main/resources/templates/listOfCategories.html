@@ -75,7 +75,7 @@
     </tr>
     </thead>
     <tbody>
-    <tr th:each="category : ${category}" class="category">
+    <tr th:each="category : ${categories}" class="category">
         <td>
             <a th:href="@{/product/listOfProducts/{id}(id=${category.id})}" th:text="${category.name}">Name</a>
         </td>

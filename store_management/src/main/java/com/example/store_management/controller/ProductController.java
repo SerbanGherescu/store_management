@@ -13,6 +13,10 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
 @Controller
 @RequestMapping("/product")
 public class ProductController {
@@ -33,7 +37,11 @@ public class ProductController {
 
         ModelAndView mav = new ModelAndView("listOfProducts");
         Category category = categoryService.getCategoryById(id);
-        mav.addObject("product", productService.getAllProducts());
+        System.out.println(category);
+        List<Product> products = productService.findProductByCategoryId(id);
+
+        mav.addObject("category", category);
+        mav.addObject("product",products);
 
         return mav;
 
@@ -41,18 +49,18 @@ public class ProductController {
 
     @GetMapping("/createNewProduct")
     public String createNewProductForm(Model model) {
-
         Product product = new Product();
+        List<Category> categories = categoryService.getAllCategories();
         model.addAttribute("product", product);
-
+        model.addAttribute("categories", categories);
         return "createNewProduct";
-
     }
 
     @PostMapping("/createNewProduct")
     public String createNewProduct(@Validated @ModelAttribute("product")
-                                    Product product,
-                                    BindingResult result) {
+                                   Product product,
+                                   @RequestParam(name = "categories", required = false) Long id,
+                                   BindingResult result) {
         if (result.hasErrors()) {
             System.out.println("Some error appear when trying to create new product!");
             return "createNewProduct";
@@ -65,11 +73,21 @@ public class ProductController {
                         + product.getName()
                         + " already exists!");
             } else {
+                // Check if id is not null before using it
+                if (id != null) {
+                    // Fetch the category by id
+                    Category category = categoryService.getCategoryById(id);
+                    if (category != null) {
+                        // Set the category to the product
+                        product.setCategory(category);
+                    }
+                }
                 productService.saveProduct(product);
             }
             return "redirect:/product/createNewProduct?success";
         }
     }
+
 
     @DeleteMapping("/deleteProduct/{id}")
     public ResponseEntity<?> deleteProductById(@PathVariable Long id) {

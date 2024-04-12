@@ -15,6 +15,8 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.List;
+
 @Controller
 @RequestMapping("/category")
 public class CategoryController {
@@ -28,12 +30,11 @@ public class CategoryController {
 
     @GetMapping("/listOfCategories")
     public ModelAndView showListOfCategories() {
-
+        List<Category> categories = categoryService.getAllCategories();
+        System.out.println("Number of categories: " + categories.size()); // Log the number of categories
         ModelAndView mav = new ModelAndView("listOfCategories");
-        mav.addObject("category", categoryService.getAllCategories());
-
+        mav.addObject("categories", categories);
         return mav;
-
     }
 
     @GetMapping("/createNewCategory")

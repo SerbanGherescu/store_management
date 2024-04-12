@@ -37,11 +37,9 @@ public class ProductService {
 
     }
 
-    public Optional<Product> findProductById(Long id) {
+    public List<Product> findProductByCategoryId(Long id) {
 
-        Optional<Product> productFound = productRepo.findById(id);
-
-        return productFound;
+        return productRepo.findByCategoryId(id);
 
     }
 

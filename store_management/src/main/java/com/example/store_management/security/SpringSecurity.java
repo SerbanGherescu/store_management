@@ -59,7 +59,9 @@ public class SpringSecurity {
                         .ignoringRequestMatchers("/adminPanel/deleteEmployee/**",
                                 "/category/deleteCategory/**",
                                 "/product/deleteProduct/**",
-                                "/category/listOfCategories/{id}")
+                                "/category/listOfCategories/{id}",
+                                "/product/createNewProduct",
+                                "/favicon.ico","/error")
                 );
         return http.build();
     }
