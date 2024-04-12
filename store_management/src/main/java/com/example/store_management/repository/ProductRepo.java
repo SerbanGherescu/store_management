@@ -20,6 +20,5 @@ public interface ProductRepo extends JpaRepository<Product, Long> {
 
     void deleteById(Long id);
 
-
-
+    Product getProductById(Long idd);
 }

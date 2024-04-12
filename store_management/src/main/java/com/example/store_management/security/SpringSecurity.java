@@ -42,7 +42,10 @@ public class SpringSecurity {
                                 .hasRole("ADMIN")
                                 .requestMatchers("/index",
                                         "/category/listOfCategories",
-                                        "/product/listOfProducts/{id}")
+                                        "/product/listOfProducts/{id}",
+                                        "/product/updatePrice/{id}",
+                                        "/product/updateQuantity/{id}",
+                                        "/product/updateStock/{id}")
                                 .authenticated()
                                 .requestMatchers("/login")
                                 .permitAll()
@@ -61,6 +64,9 @@ public class SpringSecurity {
                                 "/product/deleteProduct/**",
                                 "/category/listOfCategories/{id}",
                                 "/product/createNewProduct",
+                                "/product/updatePrice/{id}",
+                                "/product/updateQuantity/{id}",
+                                "/product/updateStock/{id}",
                                 "/favicon.ico","/error")
                 );
         return http.build();

@@ -80,7 +80,7 @@
             <a th:href="@{/product/listOfProducts/{id}(id=${category.id})}" th:text="${category.name}">Name</a>
         </td>
         <td>
-            <button
+            <button th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}"
                     class="btn btn-danger delete-button"
                     th:attr="data-category-id=${category.id}">Delete</button>
         </td>

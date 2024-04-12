@@ -54,6 +54,30 @@ public class ProductService {
                 + " successfully deleted!");
     }
 
+    public void updateProductStock(Long productId, boolean newStockStatus) {
+        Product product = productRepo.getProductById(productId);
+        if (product != null) {
+            product.setStock(newStockStatus);
+            productRepo.save(product);
+        }
+    }
+
+    public void updateProductQuantity(Long productId, int newQuantity) {
+        Product product = productRepo.getProductById(productId);
+        if (product != null) {
+            product.setQuantity(newQuantity);
+            productRepo.save(product);
+        }
+    }
+
+    public void updateProductPrice(Long productId, double newPrice) {
+        Product product = productRepo.getProductById(productId);
+        if (product != null) {
+            product.setPrice(newPrice);
+            productRepo.save(product);
+        }
+    }
+
     public void deleteProductById(Long id) {
         productRepo.deleteById(id);
         System.out.println("Product with id "

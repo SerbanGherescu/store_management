@@ -42,7 +42,6 @@
     <table class="table">
         <thead>
         <tr>
-            <th scope="col">ID</th>
             <th scope="col">Name</th>
             <th scope="col">Stock</th>
             <th scope="col">Quantity</th>
@@ -51,16 +50,31 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:each="product : ${products}">
-            <td th:text="${product.id}"></td>
+        <tr th:each="product : ${product}">
             <td th:text="${product.name}"></td>
-            <td th:text="${product.stock}"></td>
-            <td th:text="${product.quantity}"></td>
-            <td th:text="${product.price}"></td>
+            <td th:text="${product.stock}">
+            </td>
+            <td th:text="${product.quantity}">
+            </td>
+            <td th:text="${product.price}">
+            </td>
             <td>
-                <button
+                <button th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}"
                 class="btn btn-danger delete-button"
                 th:attr="data-product-id=${product.id}">Delete</button>
+
+                <form th:action="@{/product/updateStock/{id}(id=${product.id})}" method="post">
+                    <input type="hidden" name="newStockStatus" th:value="${!product.stock}" />
+                    <button type="submit" class="btn btn-primary">Toggle Stock</button>
+                </form>
+                <form th:action="@{/product/updateQuantity/{id}(id=${product.id})}" method="post">
+                    <input type="number" name="newQuantity" th:value="${product.quantity}" />
+                    <button type="submit" class="btn btn-primary">Update Quantity</button>
+                </form>
+                <form th:action="@{/product/updatePrice/{id}(id=${product.id})}" method="post">
+                    <input type="number" name="newPrice" th:value="${product.price}" step="0.01" />
+                    <button type="submit" class="btn btn-primary">Update Price</button>
+                </form>
             </td>
         </tr>
         </tbody>

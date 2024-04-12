@@ -12,6 +12,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -38,10 +39,10 @@ public class ProductController {
         ModelAndView mav = new ModelAndView("listOfProducts");
         Category category = categoryService.getCategoryById(id);
         System.out.println(category);
-        List<Product> products = productService.findProductByCategoryId(id);
+        List<Product> product = productService.findProductByCategoryId(id);
 
         mav.addObject("category", category);
-        mav.addObject("product",products);
+        mav.addObject("product",product);
 
         return mav;
 
@@ -88,6 +89,26 @@ public class ProductController {
         }
     }
 
+    @PostMapping("/updateStock/{id}")
+    public String updateStock(@PathVariable Long id, @RequestParam boolean newStockStatus, RedirectAttributes redirectAttributes) {
+        productService.updateProductStock(id, newStockStatus);
+        redirectAttributes.addAttribute("id", id);
+        return "redirect:/product/listOfProducts/{id}";
+    }
+
+    @PostMapping("/updateQuantity/{id}")
+    public String updateQuantity(@PathVariable Long id, @RequestParam int newQuantity, RedirectAttributes redirectAttributes) {
+        productService.updateProductQuantity(id, newQuantity);
+        redirectAttributes.addAttribute("id", id);
+        return "redirect:/product/listOfProducts/{id}";
+    }
+
+    @PostMapping("/updatePrice/{id}")
+    public String updatePrice(@PathVariable Long id, @RequestParam double newPrice, RedirectAttributes redirectAttributes) {
+        productService.updateProductPrice(id, newPrice);
+        redirectAttributes.addAttribute("id", id);
+        return "redirect:/product/listOfProducts/{id}";
+    }
 
     @DeleteMapping("/deleteProduct/{id}")
     public ResponseEntity<?> deleteProductById(@PathVariable Long id) {
