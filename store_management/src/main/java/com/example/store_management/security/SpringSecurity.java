@@ -18,7 +18,7 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 public class SpringSecurity {
 
     @Autowired
-    private UserDetailsService userDetailsService;
+    private CustomUserDetailsService userDetailsService;
 
     @Bean
     public static PasswordEncoder passwordEncoder() {
@@ -33,11 +33,12 @@ public class SpringSecurity {
                                         "/product/createNewProduct",
                                         "/product/deleteProduct/{id}",
                                         "/category/createNewCategory",
-                                        "/category/deleteCategory/{name}",
+                                        "/category/listOfCategories/{id}",
+                                        "/category/deleteCategory/{id}",
                                         "/adminPanel",
                                         "/adminPanel/createNewEmployee",
                                         "/adminPanel/deleteEmployee/{id}"
-                                        )
+                                )
                                 .hasRole("ADMIN")
                                 .requestMatchers("/index",
                                         "/category/listOfCategories",
@@ -55,16 +56,22 @@ public class SpringSecurity {
                                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                                 .permitAll()
                 ).csrf(csrf -> csrf
-                        .ignoringRequestMatchers("/adminPanel/deleteEmployee/**")
+                        .ignoringRequestMatchers("/adminPanel/deleteEmployee/**",
+                                "/category/deleteCategory/**",
+                                "/product/deleteProduct/**",
+                                "/category/listOfCategories/{id}")
                 );
         return http.build();
     }
 
     @Autowired
-    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth
-                .userDetailsService(userDetailsService)
-                .passwordEncoder(passwordEncoder());
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.userDetailsService(userDetailsService);
+        // Add additional in-memory users if needed
+        auth.inMemoryAuthentication()
+                .withUser("admin")
+                .password(passwordEncoder().encode("admin"))
+                .roles("ADMIN");
     }
 
 }

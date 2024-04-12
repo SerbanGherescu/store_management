@@ -31,17 +31,4 @@ public class CustomUserDetailsService implements UserDetailsService {
         }
     }
 
-    @Autowired
-    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth
-                .inMemoryAuthentication()
-                .withUser("admin")
-                .password(passwordEncoder().encode("admin"))
-                .roles("ADMIN");
-    }
-
-//    @Bean
-//    static GrantedAuthorityDefaults grantedAuthorityDefaults() {
-//        return new GrantedAuthorityDefaults("USER");
-//    }
 }

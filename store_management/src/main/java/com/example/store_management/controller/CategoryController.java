@@ -3,7 +3,11 @@ package com.example.store_management.controller;
 import com.example.store_management.entity.Category;
 import com.example.store_management.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -58,12 +62,22 @@ public class CategoryController {
                 categoryService.saveCategory(category);
             }
         }
-        return "redirect:/createNewCategory";
+        return "redirect:/category/createNewCategory?success";
     }
 
-    @DeleteMapping("/deleteCategory/{name}")
-    public ResponseEntity<?> deleteCategoryByName(@PathVariable String name) {
-        categoryService.deleteCategoryByName(name);
-        return ResponseEntity.ok().build();
+    @DeleteMapping("/deleteCategory/{id}")
+    public ResponseEntity<?> deleteCategory(@PathVariable Long id) {
+        // Check if the authenticated user has the necessary role
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (!authentication.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_ADMIN"))) {
+            // Return a 403 Forbidden response if the user is not authorized
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+        }
+
+        // Perform the deletion logic
+        categoryService.deleteCategoryByID(id);
+
+        // Return a 204 No Content response upon successful deletion
+        return ResponseEntity.noContent().build();
     }
 }

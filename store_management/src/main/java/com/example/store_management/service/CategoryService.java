@@ -54,6 +54,14 @@ public class CategoryService {
                 + "successfully deleted!");
 
     }
+    public void deleteCategoryByID(Long id) {
+
+        categoryRepo.deleteById(id);
+        System.out.println("Category with id "
+                + id
+                + "successfully deleted!");
+
+    }
 
     public List<Product> getProductsByCategory(Category category) {
         return category.getProductList();

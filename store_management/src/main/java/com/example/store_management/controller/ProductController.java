@@ -67,7 +67,7 @@ public class ProductController {
             } else {
                 productService.saveProduct(product);
             }
-            return "redirect:/createNewProduct?success";
+            return "redirect:/product/createNewProduct?success";
         }
     }
 

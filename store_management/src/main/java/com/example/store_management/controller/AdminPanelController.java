@@ -68,8 +68,8 @@ public class AdminPanelController {
     @DeleteMapping("/deleteEmployee/{id}")
     public ResponseEntity<?> deleteEmployee(@PathVariable Long id) {
         // Check if the authenticated user has the necessary role
-        Authentication authentication1 = SecurityContextHolder.getContext().getAuthentication();
-        if (!authentication1.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_ADMIN"))) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (!authentication.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_ADMIN"))) {
             // Return a 403 Forbidden response if the user is not authorized
             return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
         }
